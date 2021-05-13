@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { Dashboard } from "./components/Dashboard";
+import { Login } from "./components/Login";
+import { ConversationProvider } from "./contexts/ConversationProvider";
+import './css/app.css'
+import 'animate.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [data, setData] = useState(null);
+
+  return(
+    <ConversationProvider id={data?.uid} name={data?.name}>
+        {data !== null
+        ? <Dashboard id={data?.uid} name={data?.name} idLogout={setData}/>
+        : <Login idSubmit={setData}/>
+        }
+    </ConversationProvider>
+  )
 }
 
 export default App;
