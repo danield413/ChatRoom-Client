@@ -34,11 +34,11 @@ export const Chat = ({ id, name }) => {
                             messages.map((message, index) => {
                                 const lastMessage = messages.length - 1 === index;
                                 if(message.from === id){
-                                    return <div className="d-flex w-100 align-items-end flex-column" ref={lastMessage ? setRef : null}>
+                                    return <div key={index} className="d-flex w-100 align-items-end flex-column" ref={lastMessage ? setRef : null}>
                                         <MessageSent key={index} text={message.message}/>
                                     </div>
                                 } else {
-                                    return <div className="d-flex w-100 align-items-start flex-column" ref={lastMessage ? setRef : null}>
+                                    return <div key={index} className="d-flex w-100 align-items-start flex-column" ref={lastMessage ? setRef : null}>
                                         <MessageReceived key={index} text={message.message} name={message.fromName}/>
                                     </div>
                                 }
