@@ -1,20 +1,25 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "author": "Daniel Díaz",
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "animate.css": "^4.1.1",
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
     "socket.io-client": "^4.1.0",
-    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
