@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import { startChecking } from '../actions/auth';
 
 import { DashboardScreen } from '../components/dashboard/DashboardScreen';
+import { StatisticsScreen } from '../components/statistics/StatisticsScreen';
 import { AuthRouter } from './AuthRouter';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
@@ -13,7 +14,7 @@ export const AppRouter = () => {
 
     const dispatch = useDispatch();
 
-    const { uid } = useSelector(state => state.auth);
+    const { checking, uid } = useSelector(state => state.auth);
 
     //se verifica el token cada vez que se renderiza de nuevo el AppRouter
     useEffect(() => {
@@ -21,6 +22,21 @@ export const AppRouter = () => {
         dispatch( startChecking() );
 
     }, [dispatch]);
+
+    if( checking ) {
+        return(
+            <div className="flexible">
+                <div className="sk-chase">
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                    <div className="sk-chase-dot"></div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <Router>
@@ -37,6 +53,12 @@ export const AppRouter = () => {
                     exact
                     path="/" 
                     component={ DashboardScreen }
+                />
+
+                <PrivateRoute
+                    isAuthenticated={!!uid}
+                    path="/stats"
+                    component={ StatisticsScreen }
                 />
 
                 <Redirect to="/auth/login" />
