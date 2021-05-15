@@ -6,8 +6,18 @@ export const addMessages = ( payload ) => ({
     payload
 })
 
+export const addChatMessages = (payload) => ({
+    type: types.addChatMessages,
+    payload
+})
+
 export const addUsers = ( payload ) => ({
     type: types.addUsers,
+    payload
+})
+
+export const selectUser = ( payload ) => ({
+    type: types.selectUser,
     payload
 })
 

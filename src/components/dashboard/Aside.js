@@ -1,17 +1,29 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Button, Dropdown, DropdownButton } from 'react-bootstrap'
 import { FaUserCircle } from 'react-icons/fa'
 import { AiTwotoneSetting } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/auth'
-import { cleanDashboard } from '../../actions/dashboard';
+import { cleanDashboard, selectUser } from '../../actions/dashboard';
 import { Link } from 'react-router-dom';
 
 export const Aside = () => {
 
-    const { uid, name } = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    const { users } = useSelector(state => state.dashboard)
+    const { uid, name } = useSelector(state => state.auth);
+    const { users } = useSelector(state => state.dashboard);
+    const { selectedUser } = useSelector(state => state.dashboard);
+
+    const userLeaves = useCallback(() => {
+        const u = users.find( user => user.id === selectedUser?.uid );
+        if(!u) {
+            dispatch( selectUser({}) )
+        }
+    }, [users, selectedUser?.uid, dispatch])
+
+    useEffect(() => {
+       userLeaves()
+    }, [users, userLeaves])
     
     const handleLogout = () => {
         dispatch( logout() );
@@ -35,10 +47,14 @@ export const Aside = () => {
             <div className="w-100 px-3">
                 <Link to="/stats" className="btn btn-outline-info mb-3 w-100">Ver estadisticas</Link>
                 <h5 className="lead"><strong className="text-light">Conectados</strong></h5>
-                
+                    <Button onClick={ () => dispatch( selectUser({}) ) } className="text-white my-2 w-100 text-start animate__animated animate animate__bounceIn" variant={selectedUser?.name && selectedUser?.uid ? 'outline-primary' : 'primary'}>
+                        <i className="fas fa-circle mx-2" style={{fontSize: '12px', color: '#1DD200'}}></i>
+                        <span>Sala general</span>
+                    </Button>
                     {users &&
                         users.map(user => (
-                            <Button key={user.id} className="text-white my-2 w-100 text-start animate__animated animate animate__bounceIn" variant="outline-primary">
+                            (user?.id !== uid) &&
+                                <Button onClick={ () => dispatch( selectUser({ uid: user?.id, name: user?.name }) ) } key={user.id} className="text-white my-2 w-100 text-start animate__animated animate animate__bounceIn" variant={user.id === selectedUser?.uid ? 'primary' : 'outline-primary'}>
                                 <i className="fas fa-circle mx-2" style={{fontSize: '12px', color: '#1DD200'}}></i>
                                 <span>{user.name}</span>
                             </Button>

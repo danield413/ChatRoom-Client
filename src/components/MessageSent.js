@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types';
+
 
 export const MessageSent = ({text, date}) => {
 
@@ -8,4 +10,9 @@ export const MessageSent = ({text, date}) => {
             <span className="d-block text-light align-self-end" style={{ fontSize: '12px' }}>{date}</span>
         </div>
     )
+}
+
+MessageSent.propTypes = {
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
 }

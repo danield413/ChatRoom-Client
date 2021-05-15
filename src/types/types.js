@@ -4,6 +4,8 @@ export const types = {
     authLogout: "AUTH logout",
 
     addMessages: "DASHBOARD add messages",
+    addChatMessages: "DASHBOARD add chat messages",
     addUsers: "DASHBOARD add users",
-    cleanDashboard: "DASHBOARD clean"
+    cleanDashboard: "DASHBOARD clean",
+    selectUser: "DASHBOARD select user"
 }

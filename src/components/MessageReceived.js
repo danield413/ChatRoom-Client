@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export const MessageReceived = ({text, name, date}) => {
 
@@ -9,4 +10,10 @@ export const MessageReceived = ({text, name, date}) => {
             <span className="d-block text-muted align-self-end" style={{ fontSize: '12px' }}>{date}</span>
         </div>
     )
+}
+
+MessageReceived.propTypes = {
+    text: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
 }

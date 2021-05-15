@@ -1,8 +1,9 @@
 import axios from "axios";
 import { types } from "../types/types";
+import Swal from 'sweetalert2'
 
 export const startLogin = ( email, password ) => {
-    return async(dispatch) =>{
+    return async(dispatch) => {
         const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
             email, password
         })
@@ -22,7 +23,25 @@ export const startLogin = ( email, password ) => {
 const login = ( data ) => ({
     type: types.authLogin,
     payload: data
-})
+});
+
+export const startRegister = ( name, email, password ) => {
+    return async(dispatch) => {
+        const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
+            name, email, password
+        });
+
+        if(data.ok) {
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                title: 'Cuenta creada',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
+}
 
 export const startChecking = () => {
     return async(dispatch) => {

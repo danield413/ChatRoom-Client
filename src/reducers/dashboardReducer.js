@@ -2,7 +2,9 @@ import { types } from "../types/types";
 
 const initialState = {
     messages: [],
-    users: []
+    users: [],
+    selectedUser: {},
+    chatMessages: []
 }
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -22,6 +24,16 @@ export const dashboardReducer = (state = initialState, action) => {
             return {
                 messages: [],
                 users: []
+            }
+        case types.selectUser: 
+            return {
+                ...state,
+                selectedUser: action.payload
+            }
+        case types.addChatMessages: 
+            return {
+                ...state,
+                chatMessages: action.payload
             }
         default:
             return state;
