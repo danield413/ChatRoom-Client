@@ -21,4 +21,9 @@ export const selectUser = ( payload ) => ({
     payload
 })
 
+export const addAllUsers = ( payload ) => ({
+    type: types.addAllUsers,
+    payload
+})
+
 export const cleanDashboard = () => ({ type: types.cleanDashboard })

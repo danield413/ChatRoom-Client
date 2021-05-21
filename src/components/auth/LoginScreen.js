@@ -21,8 +21,10 @@ export const LoginScreen = () => {
         const validation = /^(([^<>()[\].,;:\s@”]+(\.[^<>()[\].,;:\s@”]+)*)|(”.+”))@(([^<>()[\].,;:\s@”]+\.)+[^<>()[\].,;:\s@”]{2,})$/;
         
         if (validation.test(email) && password.length >= 8) {
-            
+
             dispatch( startLogin(email, password) );
+            emailRef.current.value = '';
+            passwordRef.current.value = '';
 
         } else if (email.length === 0 || password.length < 6) {
             setError(true);

@@ -1,9 +1,10 @@
 import axios from "axios";
-import { types } from "../types/types";
 import Swal from 'sweetalert2'
+import { types } from "../types/types";
 
 export const startLogin = ( email, password ) => {
     return async(dispatch) => {
+
         const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
             email, password
         })
@@ -16,6 +17,8 @@ export const startLogin = ( email, password ) => {
                 name: data.user.name,
                 email: data.user.email
             }))
+        } else {
+            Swal.fire('Error', data.msg, 'error');
         }
     }
 }
@@ -30,8 +33,18 @@ export const startRegister = ( name, email, password ) => {
         const { data } = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
             name, email, password
         });
-
+ 
         if(data.ok) {
+            localStorage.setItem('chat-token', data.token);
+            
+            dispatch( newUser() );
+
+            dispatch( login({
+                uid: data.user.uid,
+                name: data.user.name,
+                email: data.user.email
+            }));
+
             Swal.fire({
                 position: 'bottom-end',
                 icon: 'success',
@@ -39,7 +52,10 @@ export const startRegister = ( name, email, password ) => {
                 showConfirmButton: false,
                 timer: 1500
             })
-        }
+        } else {
+            Swal.fire('Error', data.msg, 'error')
+        } 
+
     }
 }
 
@@ -65,6 +81,8 @@ export const startChecking = () => {
         }
     }
 }
+
+const newUser = () => ({ type: types.newUser })
 
 const checkingFinish = () => ({ type: types.authCheckingJWTFinish })
 

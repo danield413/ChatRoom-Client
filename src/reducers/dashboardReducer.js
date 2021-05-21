@@ -4,7 +4,8 @@ const initialState = {
     messages: [],
     users: [],
     selectedUser: {},
-    chatMessages: []
+    chatMessages: [],
+    allUsers: [],
 }
 
 export const dashboardReducer = (state = initialState, action) => {
@@ -34,6 +35,11 @@ export const dashboardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 chatMessages: action.payload
+            }
+        case types.addAllUsers: 
+            return {
+                ...state,
+                allUsers: action.payload
             }
         default:
             return state;
