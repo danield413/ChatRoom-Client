@@ -20,7 +20,7 @@ export const Online = () => {
                     <FaUserCircle color="#fff" size="26px" style={{ marginRight: '10px' }} className="ms-3"/>
                     <span className="fw-bold">Sala general <i className="fas fa-circle mx-2" style={{fontSize: '12px', color: '#1DD200'}}></i></span>
                 </button>
-                <div className="w-100 overflow-auto" style={{ height: '50vh' }}>
+                <div className="w-100 overflow-auto" style={{ height: '45vh' }}>
                     {users &&
                         users.map(user => (
                             (user?.id !== uid) &&

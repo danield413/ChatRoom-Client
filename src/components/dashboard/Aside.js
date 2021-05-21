@@ -8,6 +8,7 @@ import { cleanDashboard, selectUser } from '../../actions/dashboard';
 import { Online } from './Online';
 import { All } from './All';
 import { Link } from 'react-router-dom';
+import { IoIosStats } from 'react-icons/io';
 
 export const Aside = () => {
 
@@ -43,17 +44,19 @@ export const Aside = () => {
                         <span className="fw-bold text-white">{name}</span>
                     </div>
                     <DropdownButton title={<AiTwotoneSetting />} id="dropdown-item-button" variant="dark" className="bg-dark">
-                        <Dropdown.ItemText className="bg-secondary text-dark">
+                        <Dropdown.ItemText className="bg-secondary text-light">
                             <strong>Opciones</strong>
                         </Dropdown.ItemText>
-                        <Dropdown.Item as="button" onClick={handleLogout} className="bg-secondary text-dark">
+                        <Dropdown.Item as="button" onClick={handleLogout} className="bg-secondary text-light">
                             Salir
                         </Dropdown.Item>
                     </DropdownButton>
                 </div>
             </header>
             <p className="text-muted text-center mt-2">{uid}</p>
-            <Link to="/stats" className="d-inline-block">Estadisticas</Link>
+            <div className="w-100 d-flex justify-content-center mb-3">
+                <Link to="/stats" className="btn btn-outline-info d-flex align-items-center"><IoIosStats className="me-1"/>Estadísticas</Link>
+            </div>
             <div>
                 <ButtonGroup aria-label="selección" className="w-100">
                     <button 

@@ -1,7 +1,9 @@
-import React, { useCallback, useRef } from 'react'
+import axios from 'axios';
+import React, { useCallback, useEffect, useRef } from 'react'
 import { Spinner } from 'react-bootstrap';
 import { IoMdSend } from 'react-icons/io';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addChatMessages } from '../../actions/dashboard';
 import { MessageReceived } from '../dashboard/MessageReceived';
 import { MessageSent } from '../dashboard/MessageSent';
 
@@ -11,6 +13,7 @@ export const PrivateChat = ({ sendPrivateMessage }) => {
     const { selectedUser } = useSelector(state => state.dashboard);
     const { chatMessages } = useSelector(state => state.dashboard);
     const { uid } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
 
     const setRef = useCallback( node => {
         if( node ) {
@@ -27,6 +30,18 @@ export const PrivateChat = ({ sendPrivateMessage }) => {
             textRef.current.value = '';
         }
     }
+
+    useEffect(() => {
+        //Solo si hay un usuario (chat) seleccionado
+        if(selectedUser?.uid) {
+            axios.get(`${process.env.REACT_APP_API_URL}/messages/get-all-chat/${uid}/${selectedUser?.uid}`, {
+                headers: {
+                    'x-token': localStorage.getItem('chat-token'),
+                    'Content-Type': 'application/json'
+                }
+            }).then( ( {data} ) => dispatch( addChatMessages(data.messagesChat) ))
+        }
+    }, [selectedUser?.uid, selectedUser?.name, uid, dispatch]); 
 
     return (
         <div className="chat w-100">

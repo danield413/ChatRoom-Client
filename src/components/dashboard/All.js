@@ -11,7 +11,7 @@ export const All = () => {
     return (
         <>
             <h5 className="lead ms-4 my-3"><strong className="text-light">Todos</strong></h5>
-            <div className="w-100 overflow-auto" style={{ height: '60vh' }}>
+            <div className="w-100 overflow-auto" style={{ height: '55vh' }}>
             {allUsers &&
                 allUsers.map(user => (
                     (user?.id !== uid) &&

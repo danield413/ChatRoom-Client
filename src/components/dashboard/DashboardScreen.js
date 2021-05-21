@@ -1,141 +1,50 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import io from 'socket.io-client';
-import axios from 'axios';
-import dayjs from 'dayjs';
 
 import { Aside } from './Aside';
 import { Chat } from './Chat';
-import { addAllUsers, addChatMessages, addMessages, addUsers, selectUser } from '../../actions/dashboard';
+import { addAllUsers, addMessages, selectUser } from '../../actions/dashboard';
 import { PrivateChat } from './PrivateChat';
+import { useSocket } from '../../context/SocketProvider';
+import axios from 'axios';
+
 
 export const DashboardScreen = () => {
-    const [socket, setSocket] = useState();
-    const { uid, name } = useSelector(state => state.auth);
-    const { selectedUser } = useSelector(state => state.dashboard);
+
+    const { selectedUser, messages, users } = useSelector(state => state.dashboard);
+    const {sendMessage, sendPrivateMessage} = useSocket();
     const dispatch = useDispatch();
 
-    const sendMessage = useCallback(( message ) => {
-        const dateDayJS = dayjs(new Date());
-        const newHour = (dateDayJS.$H > 12) ? dateDayJS.$H -= 12 : dateDayJS.$H;
-        const date = 
-        `${newHour}:${dateDayJS.$m.toString().length === 1 ? `0${dateDayJS.$m}` : dateDayJS.$m} ${dateDayJS.$D}/${dateDayJS.$W}/${dateDayJS.$y}`;
-
-        socket.emit('send-message',{message, user: uid, date})
-    }, [socket, uid]);
-
-    const sendPrivateMessage = useCallback(( message ) => {
-        const dateDayJS = dayjs(new Date());
-        const newHour = (dateDayJS.$H > 12) ? dateDayJS.$H -= 12 : dateDayJS.$H;
-        const date = 
-        `${newHour}:${dateDayJS.$m.toString().length === 1 ? `0${dateDayJS.$m}` : dateDayJS.$m} ${dateDayJS.$D}/${dateDayJS.$W}/${dateDayJS.$y}`;
-
-        socket.emit('send-private-message', [{message, date}, {uid: selectedUser.uid, name: selectedUser.name}]);
-    }, [selectedUser?.uid, selectedUser?.name, socket]);
-
     useEffect(() => {
-
-        const newSocket = io('http://localhost:5000', {
-        query: { uid, name }
-        })
-        setSocket(newSocket)
-
-      return () => newSocket.close()
-    }, [uid, name]);
-
-    useEffect(() => {
-        if(!socket) return;
-
-        socket.on('receive-messages', (payload) => {
-            dispatch( addMessages(payload) )
-        })
-
-        return () => socket.off('receive-messages')
-    }, [socket, dispatch]);
-
-    useEffect(() => {
-        if(!socket) return;
-
-        socket.on('created-message', (payload) => {
-            dispatch( addMessages(payload) )
-        })
-
-        return () => socket.off('created-message')
-    }, [socket, dispatch]);
-
-    useEffect(() => {
-        if(!socket) return;
-
-        socket.on('active-users', (payload) => {
-            dispatch( addUsers(payload) );
-        })
-
-        return () => socket.off('active-users')
-    }, [socket, dispatch]);
-
-    useEffect(() => {
-        if(!socket) return;
-        
-        socket.on('private-messages', (payload) => {
-            dispatch( addChatMessages(payload) )
-        })
-
-        return () => socket.off('private-messages')
-    }, [socket, dispatch]);
-
-    useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/messages/get-all`, {
-            headers: {
-                'x-token': localStorage.getItem('chat-token'),
-                'Content-Type': 'application/json'
-            }
-        }).then( ( {data} ) => dispatch( addMessages(data.messages) ))
-
-    }, [dispatch]);
-
-    useEffect(() => {
-        //Solo si hay un usuario (chat) seleccionado
-        if(selectedUser?.uid) {
-            axios.get(`${process.env.REACT_APP_API_URL}/messages/get-all-chat/${uid}/${selectedUser?.uid}`, {
-                headers: {
-                    'x-token': localStorage.getItem('chat-token'),
-                    'Content-Type': 'application/json'
-                }
-            }).then( ( {data} ) => dispatch( addChatMessages(data.messagesChat) ))
-        }
-    }, [selectedUser?.uid, selectedUser?.name, uid, dispatch]);  
-
-    useEffect(() => {
+       if(users.length === 0) {
         axios.get(`${process.env.REACT_APP_API_URL}/auth/registered-users`, {
             headers: {
                 'x-token': localStorage.getItem('chat-token'),
                 'Content-Type': 'application/json'
             }
         }).then( ( {data} ) => dispatch( addAllUsers(data.allUsers) ))
+       }
 
-    }, [dispatch])
+    }, [dispatch, users]);
 
-    // useEffect(() => {
-    //     if(!socket) return;
-    //     if(newUser) {
-    //         socket.emit('new-user', newUser);
-    //     }
-    // }, [newUser, socket])
+    useEffect(() => {
+       if(messages.length === 0) {
+        axios.get(`${process.env.REACT_APP_API_URL}/messages/get-all`, {
+            headers: {
+                'x-token': localStorage.getItem('chat-token'),
+                'Content-Type': 'application/json'
+            }
+        }).then( ( {data} ) => dispatch( addMessages(data.messages) ))
+       }
 
-    // useEffect(() => {
-    //     if(!socket) return;
-    //     console.log('está pendiente');
-    //     socket.on('res-new-user', (payload) => {
-    //         dispatch( addAllUsers(payload) )
-    //     })
-    //     return () => socket.off('res-new-user');
-    // }, [socket, dispatch])
+    }, [dispatch, messages]);
 
+    
     return (  
         <Container fluid>
             <Row>
-                <Col md={4} style={{ background: '#262D31', borderRight: '1px solid gray' }} className="p-0">
+                <Col md={4} style={{ background: '#262D31' }} className="p-0">
                     <Aside />
                 </Col>
                 <Col md={8} className="p-0 d-flex">

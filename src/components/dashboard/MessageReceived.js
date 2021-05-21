@@ -24,7 +24,7 @@ export const MessageReceived = ({text, name, date}) => {
             <div className="lead fw-bold d-flex justify-content-between align-items-center" style={{ fontSize: '14px'}}>
                 {name}
                 <DropdownButton title="" size="sm" id="dropdown-item-button">
-                    <Dropdown.Item as="button" onClick={handleCopy} className="bg-secondary text-dark">
+                    <Dropdown.Item as="button" onClick={handleCopy} className="bg-secondary text-light">
                         Copiar texto
                     </Dropdown.Item>
                 </DropdownButton>

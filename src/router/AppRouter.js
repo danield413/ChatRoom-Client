@@ -5,6 +5,7 @@ import { startChecking } from '../actions/auth';
 
 import { DashboardScreen } from '../components/dashboard/DashboardScreen';
 import { StatisticsScreen } from '../components/statistics/StatisticsScreen';
+import { SocketProvider } from '../context/SocketProvider';
 import { AuthRouter } from './AuthRouter';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
@@ -39,31 +40,33 @@ export const AppRouter = () => {
     }
 
     return (
-        <Router>
-            <Switch>
+        <SocketProvider>
+             <Router>
+                <Switch>
 
-                <PublicRoute 
-                    isAuthenticated={!!uid}
-                    path="/auth"
-                    component={ AuthRouter }
-                />
+                    <PublicRoute 
+                        isAuthenticated={!!uid}
+                        path="/auth"
+                        component={ AuthRouter }
+                    />
 
-                <PrivateRoute 
-                    isAuthenticated={!!uid}
-                    exact
-                    path="/" 
-                    component={ DashboardScreen }
-                />
+                    <PrivateRoute 
+                        isAuthenticated={!!uid}
+                        exact
+                        path="/" 
+                        component={ DashboardScreen }
+                    />
 
-                <PrivateRoute
-                    isAuthenticated={!!uid}
-                    path="/stats"
-                    component={ StatisticsScreen }
-                />
+                    <PrivateRoute
+                        isAuthenticated={!!uid}
+                        path="/stats"
+                        component={ StatisticsScreen }
+                    />
 
-                <Redirect to="/auth/login" />
+                    <Redirect to="/auth/login" />
 
-            </Switch>
-        </Router>
+                </Switch>
+            </Router>
+        </SocketProvider>
     )
 }
