@@ -1,37 +1,38 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {Helmet} from "react-helmet";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { startLogin } from '../../actions/auth';
+
 
 export const LoginScreen = () => {
 
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const [error, setError] = useState(false);
     const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); 
+     //Validación del formulario
+     const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validationSchema: Yup.object({
+            email: Yup.string()
+                    .email( true )
+                    .required( true ),
+            password: Yup.string()
+                    .required( true )
+                    .min(8, true)
+        }),
+        onSubmit : (values) => {
 
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-
-        const validation = /^(([^<>()[\].,;:\s@”]+(\.[^<>()[\].,;:\s@”]+)*)|(”.+”))@(([^<>()[\].,;:\s@”]+\.)+[^<>()[\].,;:\s@”]{2,})$/;
-        
-        if (validation.test(email) && password.length >= 8) {
-
+            const { email, password } = values;
+           
             dispatch( startLogin(email, password) );
-            emailRef.current.value = '';
-            passwordRef.current.value = '';
-
-        } else if (email.length === 0 || password.length < 6) {
-            setError(true);
-        } else {
-            setError(true);
-        }
-    }
+        }   
+    });
 
     return (
         <>
@@ -43,14 +44,33 @@ export const LoginScreen = () => {
 
             <Container fluid className="bg-dark d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
                 <div style={{ width: '300px' }}>
-                    <Form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
+                    <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
                         <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
                         <h4 className="text-white lead">Inicio de sesión</h4>
                         <Form.Group className="mb-3">
-                            <Form.Control className="bg-dark text-white" type="email" placeholder="Correo" ref={emailRef} isInvalid={error}/>
+                            <Form.Control 
+                                autoComplete="off"
+                                name="email"
+                                className="bg-dark text-white" 
+                                type="email" 
+                                placeholder="Correo" 
+                                value={ formik.values.email }
+                                onChange={ formik.handleChange }
+                                onBlur={ formik.handleBlur }
+                                isInvalid={ formik.errors.email }
+                            />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Control className="bg-dark text-white" type="password" placeholder="Contraseña" ref={passwordRef} isInvalid={error}/>
+                            <Form.Control 
+                                name="password"
+                                className="bg-dark text-white" 
+                                type="password" 
+                                placeholder="Contraseña" 
+                                value={ formik.values.password }
+                                onChange={ formik.handleChange }
+                                onBlur={ formik.handleBlur }
+                                isInvalid={ formik.errors.password }
+                            />
                         </Form.Group>
                         <Button type="submit" variant="outline-primary" className="w-100 mt-3">
                             Ingresar
