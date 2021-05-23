@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { MdDone } from 'react-icons/md';
@@ -38,36 +39,46 @@ export const RegisterScreen = () => {
     }
 
     return (
-        <Container fluid className="bg-dark d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
-            <div style={{ width: '300px' }}>
-                <Form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
-                    <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
-                    {/* <motion.div 
-                        animate={{
-                            scale: [1, 1.1, 1.1, 1],
-                            rotate: [0, 360, 0],
-                            borderRadius: ["15px", "50%", "40%", "50%px"]
-                        }}
-                        className="px-3 py-3 d-flex align-items-center justify-content-center animate__animated animate__" style={{ height: '60px', width: '60px', border: '2px solid #4AC95D', color: '#4AC95D', margin: '0 auto'}}
-                    >
-                        <MdDone size="30px"/>
-                    </motion.div> */}
-                    <h4 className="text-white lead mt-3">Registro</h4>
-                    <Form.Group className="mb-3">
-                        <Form.Control className="bg-dark text-white" type="text" placeholder="Nombre" ref={nameRef} isInvalid={error}/>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Control className="bg-dark text-white" type="email" placeholder="Correo" ref={emailRef} isInvalid={error}/>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control className="bg-dark text-white" type="password" placeholder="Contraseña" ref={passwordRef} isInvalid={error}/>
-                    </Form.Group>
-                    <Button type="submit" variant="outline-primary" className="w-100 mt-3">
-                        Registrarme
-                    </Button>
-                    <Link to="/auth/login" className="d-inline-block mt-3">Si ya tienes una cuenta</Link>
-                </Form>
-            </div>
-        </Container>
+        <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Chat | Register</title>
+                <meta name="description" content="Registro de nuevo usuario" />
+            </Helmet>
+
+            <Container fluid className="bg-dark d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
+                
+                <div style={{ width: '300px' }}>
+                    <Form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
+                        <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
+                        {/* <motion.div 
+                            animate={{
+                                scale: [1, 1.1, 1.1, 1],
+                                rotate: [0, 360, 0],
+                                borderRadius: ["15px", "50%", "40%", "50%px"]
+                            }}
+                            className="px-3 py-3 d-flex align-items-center justify-content-center animate__animated animate__" style={{ height: '60px', width: '60px', border: '2px solid #4AC95D', color: '#4AC95D', margin: '0 auto'}}
+                        >
+                            <MdDone size="30px"/>
+                        </motion.div> */}
+                        <h4 className="text-white lead mt-3">Registro</h4>
+                        <Form.Group className="mb-3">
+                            <Form.Control className="bg-dark text-white" type="text" placeholder="Nombre" ref={nameRef} isInvalid={error}/>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Control className="bg-dark text-white" type="email" placeholder="Correo" ref={emailRef} isInvalid={error}/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control className="bg-dark text-white" type="password" placeholder="Contraseña" ref={passwordRef} isInvalid={error}/>
+                        </Form.Group>
+                        <Button type="submit" variant="outline-primary" className="w-100 mt-3">
+                            Registrarme
+                        </Button>
+                        <Link to="/auth/login" className="d-inline-block mt-3">Si ya tienes una cuenta</Link>
+                    </Form>
+                </div>
+            </Container>
+        </>
+        
     )
 }

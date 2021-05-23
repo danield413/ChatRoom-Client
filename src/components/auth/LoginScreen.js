@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {Helmet} from "react-helmet";
 import { startLogin } from '../../actions/auth';
-
 
 export const LoginScreen = () => {
 
@@ -34,23 +34,31 @@ export const LoginScreen = () => {
     }
 
     return (
-        <Container fluid className="bg-dark d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-            <div style={{ width: '300px' }}>
-                <Form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
-                    <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
-                    <h4 className="text-white lead">Inicio de sesión</h4>
-                    <Form.Group className="mb-3">
-                        <Form.Control className="bg-dark text-white" type="email" placeholder="Correo" ref={emailRef} isInvalid={error}/>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Control className="bg-dark text-white" type="password" placeholder="Contraseña" ref={passwordRef} isInvalid={error}/>
-                    </Form.Group>
-                    <Button type="submit" variant="outline-primary" className="w-100 mt-3">
-                        Ingresar
-                    </Button>
-                    <Link to="/auth/register" className="d-inline-block mt-3">Si no tienes una cuenta</Link>
-                </Form>
-            </div>
-        </Container>
+        <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Chat | Login</title>
+                <meta name="description" content="Inicio de sesión" />
+            </Helmet>
+
+            <Container fluid className="bg-dark d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+                <div style={{ width: '300px' }}>
+                    <Form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
+                        <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
+                        <h4 className="text-white lead">Inicio de sesión</h4>
+                        <Form.Group className="mb-3">
+                            <Form.Control className="bg-dark text-white" type="email" placeholder="Correo" ref={emailRef} isInvalid={error}/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Control className="bg-dark text-white" type="password" placeholder="Contraseña" ref={passwordRef} isInvalid={error}/>
+                        </Form.Group>
+                        <Button type="submit" variant="outline-primary" className="w-100 mt-3">
+                            Ingresar
+                        </Button>
+                        <Link to="/auth/register" className="d-inline-block mt-3">Si no tienes una cuenta</Link>
+                    </Form>
+                </div>
+            </Container>
+        </>
     )
 }

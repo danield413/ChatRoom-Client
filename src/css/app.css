@@ -1,5 +1,5 @@
 * {
-    font-family: "Segoe UI";
+  font-family: 'Poppins', sans-serif;
 }
 html {
   scroll-behavior: smooth;
@@ -155,6 +155,7 @@ html {
   color: tomato;
   font-size: 50px;
   font-weight: bold;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .dropdown-menu{

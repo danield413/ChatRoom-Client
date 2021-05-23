@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
-import { addChatMessages, addMessages, addUsers } from '../actions/dashboard';
+import { addChatMessages, addMessages, addUsers, addAllUsers } from '../actions/dashboard';
 import { setStats } from '../actions/stats';
 
 const SocketContext = React.createContext();
@@ -38,14 +38,14 @@ export const SocketProvider = ( {children} ) => {
     }, [selectedUser?.uid, selectedUser?.name, socket]);
 
     useEffect(() => {
-        if(socket) return;
-        const newSocket = io('http://localhost:5000', {
+
+        const newSocket = io(process.env.REACT_APP_URL, {
         query: { uid, name }
         })
         setSocket(newSocket)
-        
-      return () => newSocket.close()
-    }, [uid, name, socket]);
+  
+        return () => newSocket.close();
+    }, [uid, name]);
 
     useEffect(() => {
         if(!socket) return;
@@ -86,17 +86,15 @@ export const SocketProvider = ( {children} ) => {
         return () => socket.off('private-messages')
     }, [socket, dispatch]);
 
-    
-
     useEffect(() => {
+       if(!socket) return;
 
-        const newSocket = io('http://localhost:5000', {
-        query: { uid, name }
-        })
-        setSocket(newSocket)
-  
-        return () => newSocket.close();
-      }, [uid, name]);
+       socket.on('registered-users', (payload) => {
+            dispatch( addAllUsers(payload) )
+       })
+       return () => socket.off('registered-users')
+    }, [socket, dispatch])
+
   
       useEffect(() => {
         if(!socket) return;
