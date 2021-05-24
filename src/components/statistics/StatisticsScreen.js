@@ -19,9 +19,9 @@ export const StatisticsScreen = () => {
 
             <Container fluid>
                 <Row>
-                    <Col md={12} style={{ background: '#333A41' }} className="p-0">
-                        <div style={{ height: '100vh' }}>
-                            <div className="px-3 py-2" style={{ background: '#2A2F32'  }}>
+                    <Col md={12} className="p-0 bg-chat">
+                        <div className="container-full">
+                            <div className="px-3 py-2 bg-head-chat">
                                 <Link to="/" className="btn btn-outline-info fw-bold d-flex align-items-center d-inline-flex">
                                 <BsFillCaretLeftFill />Inicio
                                 </Link>

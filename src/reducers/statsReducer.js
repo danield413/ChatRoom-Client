@@ -12,6 +12,10 @@ export const statsReducer = (state = initialState, action) => {
                 ...state,
                 countMessages: action.payload
             }
+        case types.cleanStats:
+            return {
+                countMessages: []
+            }
         default:
             return state;
     }

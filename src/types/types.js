@@ -11,5 +11,6 @@ export const types = {
     selectUser: "DASHBOARD select user",
     addAllUsers: "DASHBOARD add all registered users",
     
-    loadStats: "STATS load stats"
+    loadStats: "STATS load stats",
+    cleanStats: "STATS clean stats"
 }

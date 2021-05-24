@@ -9,6 +9,7 @@ import { Online } from './Online';
 import { All } from './All';
 import { Link } from 'react-router-dom';
 import { IoIosStats } from 'react-icons/io';
+import { cleanStats } from '../../actions/stats';
 
 export const Aside = () => {
 
@@ -32,15 +33,16 @@ export const Aside = () => {
     const handleLogout = () => {
         dispatch( logout() );
         dispatch( cleanDashboard() );
+        dispatch( cleanStats() );
         localStorage.removeItem('chat-token');
     }
 
     return (
         <aside className="h-100">
             <header>
-                <div className="w-100 bg-dark d-flex justify-content-between align-items-center px-2" style={{ height: '60px' }}>
+                <div className="w-100 bg-dark d-flex justify-content-between align-items-center px-2 header-height">
                     <div>
-                        <FaUserCircle color="#fff" size="26px" style={{ marginRight: '10px' }} className="ms-3"/>
+                        <FaUserCircle color="#fff" size="26px" className="ms-3 mr-10"/>
                         <span className="fw-bold text-white">{name}</span>
                     </div>
                     <DropdownButton title={<AiTwotoneSetting />} id="dropdown-item-button" variant="dark" className="bg-dark">
@@ -61,15 +63,13 @@ export const Aside = () => {
                 <ButtonGroup aria-label="selección" className="w-100">
                     <button 
                         onClick={ () => setState('online')} 
-                        className={`button-group ${state === 'online' && 'button-group-active'} fw-bold text-white`}
-                        style={{ width: '50%' }}
+                        className={`button-group w-50 ${state === 'online' && 'button-group-active'} fw-bold text-white`}
                     >
                         Conectados
                     </button>
                     <button 
                         onClick={ () => setState('all')} 
-                        className={`button-group ${state === 'all' && 'button-group-active'} fw-bold text-white` }
-                        style={{ width: '50%' }}
+                        className={`button-group w-50 ${state === 'all' && 'button-group-active'} fw-bold text-white` }
                     >
                         Todos
                     </button>

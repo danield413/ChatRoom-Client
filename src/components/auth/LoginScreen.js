@@ -42,8 +42,8 @@ export const LoginScreen = () => {
                 <meta name="description" content="Inicio de sesión" />
             </Helmet>
 
-            <Container fluid className="bg-dark d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-                <div style={{ width: '300px' }}>
+            <Container fluid className="bg-dark d-flex justify-content-center align-items-center container-full">
+                <div className="form">
                     <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
                         <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
                         <h4 className="text-white lead">Inicio de sesión</h4>

@@ -45,9 +45,9 @@ export const RegisterScreen = () => {
                 <meta name="description" content="Registro de nuevo usuario" />
             </Helmet>
 
-            <Container fluid className="bg-dark d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
+            <Container fluid className="bg-dark d-flex flex-column justify-content-center align-items-center container-full">
                 
-                <div style={{ width: '300px' }}>
+                <div className="form">
                     <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
                         <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
                         <h4 className="text-white lead mt-3">Registro</h4>

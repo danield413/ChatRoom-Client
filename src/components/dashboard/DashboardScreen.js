@@ -40,11 +40,11 @@ export const DashboardScreen = () => {
             
             <Container fluid>
                 <Row>
-                    <Col md={4} style={{ background: '#262D31' }} className="p-0">
+                    <Col md={4} className="p-0 aside-color">
                         <Aside />
                     </Col>
                     <Col md={8} className="p-0 d-flex">
-                        <div className="d-flex" style={{ height: '100vh', width: '100%'}}>
+                        <div className="d-flex column-chat-dimensions" >
                             {selectedUser?.uid && selectUser?.name 
                             ? <PrivateChat sendPrivateMessage={sendPrivateMessage} />
                             : <Chat sendMessage={sendMessage} />

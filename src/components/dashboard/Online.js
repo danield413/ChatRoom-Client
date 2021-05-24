@@ -17,10 +17,10 @@ export const Online = () => {
                     onClick={ () => dispatch( selectUser({}) )}
                     className={`text-white w-100 text-start animate__animated animate animate__fadeIn user-sidebar ${!selectedUser?.name && !selectedUser?.uid ? 'user-sidebar-active' : ''}`} 
                 >
-                    <FaUserCircle color="#fff" size="26px" style={{ marginRight: '10px' }} className="ms-3"/>
-                    <span className="fw-bold">Sala general <i className="fas fa-circle mx-2" style={{fontSize: '12px', color: '#1DD200'}}></i></span>
+                    <FaUserCircle color="#fff" size="26px" className="ms-3 mr-10"/>
+                    <span className="fw-bold">Chat general <i className="fas fa-circle mx-2 fz-12px text-online" ></i></span>
                 </button>
-                <div className="w-100 overflow-auto" style={{ height: '45vh' }}>
+                <div className="w-100 overflow-auto online-height">
                     {users &&
                         users.map(user => (
                             (user?.id !== uid) &&
@@ -29,8 +29,8 @@ export const Online = () => {
                                     onClick={ () => dispatch( selectUser({ uid: user?.id, name: user?.name }) )}
                                     className={`text-white w-100 text-start animate__animated animate animate__fadeIn user-sidebar ${user.id === selectedUser?.uid ? 'user-sidebar-active' : ''}`} 
                                 >
-                                    <FaUserCircle color="#fff" size="26px" style={{ marginRight: '10px' }} className="ms-3"/>
-                                    <span className="fw-bold">{user.name} <i className="fas fa-circle mx-2" style={{fontSize: '12px', color: '#1DD200'}}></i></span>
+                                    <FaUserCircle color="#fff" size="26px" className="ms-3 mr-10"/>
+                                    <span className="fw-bold">{user.name} <i className="fas fa-circle mx-2 fz-12px text-online"></i></span>
                                 </button>
                         ))
                     }

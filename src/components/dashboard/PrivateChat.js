@@ -1,18 +1,23 @@
 import axios from 'axios';
-import React, { useCallback, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion';
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
-import { IoMdSend } from 'react-icons/io';
+import { IoIosInformationCircle, IoMdSend } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import { addChatMessages } from '../../actions/dashboard';
 import { MessageReceived } from '../dashboard/MessageReceived';
 import { MessageSent } from '../dashboard/MessageSent';
+import { ModalInfo } from './ModalInfo';
 
 export const PrivateChat = ({ sendPrivateMessage }) => {
 
     const textRef = useRef();
+    const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { selectedUser } = useSelector(state => state.dashboard);
     const { chatMessages } = useSelector(state => state.dashboard);
-    const { uid } = useSelector(state => state.auth);
+    const { uid, name } = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
     const setRef = useCallback( node => {
@@ -31,30 +36,54 @@ export const PrivateChat = ({ sendPrivateMessage }) => {
         }
     }
 
+    const handleOpen = () => setShow(true);
+    const handleClose = () => setShow(false);
+
     useEffect(() => {
         //Solo si hay un usuario (chat) seleccionado
         if(selectedUser?.uid) {
+            setLoading(true)
             axios.get(`${process.env.REACT_APP_API_URL}/messages/get-all-chat/${uid}/${selectedUser?.uid}`, {
                 headers: {
                     'x-token': localStorage.getItem('chat-token'),
                     'Content-Type': 'application/json'
                 }
-            }).then( ( {data} ) => dispatch( addChatMessages(data.messagesChat) ))
+            })
+            .then( ( {data} ) => {
+                setLoading(false)
+                dispatch( addChatMessages(data.messagesChat) )
+            }) 
+            .catch( err => {
+                Swal.fire('UPS, hubo un error cargando el chat');
+            })
         }
     }, [selectedUser?.uid, selectedUser?.name, uid, dispatch]); 
 
     return (
+        <>
         <div className="chat w-100">
-            <div className="py-2 d-flex align-items-center" style={{ background: '#2A2F32' }}>
-                <span className="text-white fw-bold ms-3">{selectedUser.name}</span>
+            <div className="py-2 d-flex align-items-center justify-content-between bg-head-chat">
+                <div>
+                    <span className="text-white fw-bold ms-3">{selectedUser.name}</span>
+                </div>
+                <motion.button 
+                    onClick={handleOpen}
+                    whileTap={ {scale: 2.5} }
+                    className="button-info mr-1rem"
+                >
+                    <IoIosInformationCircle />
+                </motion.button>
             </div>
-            <div className="chat-messages overflow-auto pt-4" style={{ background: '#333A41' }}>
-            {(chatMessages.length === 0) && 
-                <div className="alert alert-warning text-center mx-5">Todavía no hay mensajes, comienza escribiendole un mensaje a {selectedUser?.name}.</div>
-            }
-            {(chatMessages.length === 0) &&
+            <div className="chat-messages overflow-auto pt-4 bg-chat">
+            
+            {(loading) &&
                 <div className="w-100 d-flex justify-content-center">
                     <Spinner animation="border" role="status" variant="primary" />
+                </div>
+            }
+            {(chatMessages && !loading && chatMessages.length === 0) &&
+                <div className="alert alert-warning mx-5 text-center">
+                    No tienes mensajes con <strong>{selectedUser?.name}.</strong>
                 </div>
             }
             {chatMessages &&
@@ -81,7 +110,7 @@ export const PrivateChat = ({ sendPrivateMessage }) => {
                 }
             </div>
            
-            <div id="chat-input" style={{ height: '100%', width: '100%', padding: '0 150px', background: '#2A2F32' }}>
+            <div id="chat-input">
                 <form onSubmit={handleSubmit} className="h-100 d-flex align-items-center">
                     <input ref={textRef} type="text" className="w-100" id="message-input" placeholder="Escribe un mensaje" autoComplete="off"/>
                     <button type="submit" id="message-submit" className="bg-primary">
@@ -90,5 +119,11 @@ export const PrivateChat = ({ sendPrivateMessage }) => {
                 </form>
             </div>
         </div>
+        <ModalInfo 
+            handleClose={handleClose} 
+            show={show}
+            participants={[name, selectedUser?.name]}
+        />
+        </>
     )
 }

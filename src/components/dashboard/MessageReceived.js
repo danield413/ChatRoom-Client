@@ -17,11 +17,10 @@ export const MessageReceived = ({text, name, date}) => {
             animate={{
                 scale: [1, 1.1, 1]
             }}
-            className="px-3 py-1 d-flex flex-column rounded text-white mb-3 animate__animated animate__fadeIn" 
-            style={{ paddingLeft: '10px', paddingRight: '20px', background: '#262D31', marginLeft: '60px', maxWidth: '60%'}}
+            className="px-3 py-1 d-flex flex-column rounded text-white mb-3 animate__animated animate__fadeIn message-received" 
         >
             {name && 
-            <div className="lead fw-bold d-flex justify-content-between align-items-center" style={{ fontSize: '14px'}}>
+            <div className="fw-bold d-flex justify-content-between align-items-center fz-14px" >
                 {name}
                 <DropdownButton title="" size="sm" id="dropdown-item-button">
                     <Dropdown.Item as="button" onClick={handleCopy} className="bg-secondary text-light">
@@ -31,7 +30,7 @@ export const MessageReceived = ({text, name, date}) => {
             </div>}
             
             {text}
-            <span className="d-block text-muted align-self-end" style={{ fontSize: '12px' }}>{date}</span>
+            <span className="d-block text-muted align-self-end fz-12px">{date}</span>
         </motion.div>
     )
 }
