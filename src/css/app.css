@@ -1,34 +1,19 @@
+@import url('./spinner.css');
+@import url('./global.css');
 
-#message-input {
-    height: 65%;
-    border: 1px solid transparent;
-    outline: none;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-    padding-left: 10px;
-    background: rgb(27, 27, 27);
-    color: white;
-    transition: 0.3s ease;
+* {
+  font-family: 'Poppins', sans-serif;
+}
+html {
+  scroll-behavior: smooth;
 }
 
-#message-input:focus{
-    border: 1px solid rgba(13,110,253);
+::-webkit-scrollbar{
+    width: 10px;
 }
-
-#message-submit {
-    border: none;
-    cursor: pointer;
-    height: 65%;
-    padding: 0 15px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+::-webkit-scrollbar-track{
+    background-color: transparent;
 }
-
-.chat{
-    display: grid;
-    grid-template-rows: 90% 10%;
-}
-
-#chat-input{
-    grid-row: 2/3;
+::-webkit-scrollbar-thumb {
+    background-color: rgb(88, 88, 88);
 }
