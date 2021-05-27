@@ -26,7 +26,7 @@ export const ModalInfo = ({show, handleClose, participants}) => {
                 {
                 !participants 
                 ?<div className="w-100">
-                    <div className="alert alert-info text-center">
+                    <div className="alert alert-info text-center text-resp">
                     Todos los usuarios registrados en <strong>ChatRoom</strong>
                     </div>
                     <img src="./assets/chatting-group.svg" alt="chatting-group" className="svg"/>

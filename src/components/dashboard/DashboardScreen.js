@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { Aside } from './Aside';
+import { AsideResponsive } from './AsideResponsive';
 import { Chat } from './Chat';
 import { addMessages, selectUser } from '../../actions/dashboard';
 import { PrivateChat } from './PrivateChat';
@@ -14,7 +13,8 @@ import { Helmet } from 'react-helmet';
 export const DashboardScreen = () => {
 
     const { name } = useSelector(state => state.auth);
-    const { selectedUser, messages } = useSelector(state => state.dashboard);
+    const [width, setWidth] = useState(window.screen.width);
+    const { selectedUser, messages, showSidebar } = useSelector(state => state.dashboard);
     const {sendMessage, sendPrivateMessage} = useSocket();
     const dispatch = useDispatch();
 
@@ -30,6 +30,17 @@ export const DashboardScreen = () => {
 
     }, [dispatch, messages]);
 
+    useEffect(() => {
+
+        const windowResize = (e) => {
+            setWidth(e.target.innerWidth)
+        }
+        
+        window.addEventListener('resize', windowResize )
+
+        return () => window.removeEventListener('resize', windowResize)
+
+    }, [])
     
     return (  
         <>
@@ -38,21 +49,36 @@ export const DashboardScreen = () => {
                 <meta name="description" content="Contenido principal del usuario y salas de chat" />
             </Helmet>
             
-            <Container fluid>
-                <Row>
-                    <Col md={4} className="p-0 aside-color">
-                        <Aside />
-                    </Col>
-                    <Col md={8} className="p-0 d-flex">
-                        <div className="d-flex column-chat-dimensions" >
-                            {selectedUser?.uid && selectUser?.name 
-                            ? <PrivateChat sendPrivateMessage={sendPrivateMessage} />
-                            : <Chat sendMessage={sendMessage} />
-                            }
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
+            <div id="container-grid">
+
+                {width > 900 &&
+                <div className="p-0 aside-color">
+                     <Aside /> 
+                </div>
+                }
+
+                {width <= 900 &&
+                <div className={`p-0 aside-color aside-responsive ${showSidebar && 'aside-responsive-show'}`}>
+                    <AsideResponsive />
+                </div>
+                }
+
+
+                <div className="p-0 d-flex">
+                    <div className="d-flex column-chat-dimensions" id="chat">
+                        {selectedUser?.uid && selectUser?.name 
+                        ? <PrivateChat 
+                            sendPrivateMessage={sendPrivateMessage} 
+                            showMenuButton={ width < 900 ? true : false } 
+                        />
+                        : <Chat 
+                            sendMessage={sendMessage} 
+                            showMenuButton={ width < 900 ? true : false }
+                        />
+                        }
+                    </div>
+                </div>
+            </div>
         </>
         
     )

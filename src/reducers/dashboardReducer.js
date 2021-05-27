@@ -41,6 +41,16 @@ export const dashboardReducer = (state = initialState, action) => {
                 ...state,
                 allUsers: action.payload
             }
+        case types.openSidebar: 
+            return {
+                ...state,
+                showSidebar: true
+            }
+        case types.closeSidebar: 
+            return {
+                ...state,
+                showSidebar: false
+            }
         default:
             return state;
     }

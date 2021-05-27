@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
-import dayjs from 'dayjs';
+import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
 import { addChatMessages, addMessages, addUsers, addAllUsers } from '../actions/dashboard';
@@ -20,19 +20,15 @@ export const SocketProvider = ( {children} ) => {
 
 
     const sendMessage = useCallback(( message ) => {
-        const dateDayJS = dayjs(new Date());
-        const newHour = (dateDayJS.$H > 12) ? dateDayJS.$H -= 12 : dateDayJS.$H;
-        const date = 
-        `${newHour}:${dateDayJS.$m.toString().length === 1 ? `0${dateDayJS.$m}` : dateDayJS.$m} ${dateDayJS.$D}/${dateDayJS.$W}/${dateDayJS.$y}`;
+       const now = new Date();
+       const date = moment(now).format('LT');
 
         socket.emit('send-message',{message, user: uid, date})
     }, [socket, uid]);
 
     const sendPrivateMessage = useCallback(( message ) => {
-        const dateDayJS = dayjs(new Date());
-        const newHour = (dateDayJS.$H > 12) ? dateDayJS.$H -= 12 : dateDayJS.$H;
-        const date = 
-        `${newHour}:${dateDayJS.$m.toString().length === 1 ? `0${dateDayJS.$m}` : dateDayJS.$m} ${dateDayJS.$D}/${dateDayJS.$W}/${dateDayJS.$y}`;
+        const now = new Date();
+        const date = moment(now).format('LT');
 
         socket.emit('send-private-message', [{message, date}, {uid: selectedUser.uid, name: selectedUser.name}]);
     }, [selectedUser?.uid, selectedUser?.name, socket]);
@@ -78,7 +74,7 @@ export const SocketProvider = ( {children} ) => {
 
     useEffect(() => {
         if(!socket) return;
-        
+
         socket.on('private-messages', (payload) => {
             dispatch( addChatMessages(payload) )
         })

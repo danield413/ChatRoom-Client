@@ -1,16 +1,18 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
+import { FaUserCircle } from 'react-icons/fa';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { IoIosInformationCircle, IoMdSend } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { addChatMessages } from '../../actions/dashboard';
+import { addChatMessages, openSidebar } from '../../actions/dashboard';
 import { MessageReceived } from '../dashboard/MessageReceived';
 import { MessageSent } from '../dashboard/MessageSent';
 import { ModalInfo } from './ModalInfo';
 
-export const PrivateChat = ({ sendPrivateMessage }) => {
+export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
 
     const textRef = useRef();
     const [show, setShow] = useState(false);
@@ -64,17 +66,31 @@ export const PrivateChat = ({ sendPrivateMessage }) => {
         <div className="chat w-100">
             <div className="py-2 d-flex align-items-center justify-content-between bg-head-chat">
                 <div>
-                    <span className="text-white fw-bold ms-3">{selectedUser.name}</span>
+                    <span className="text-white fw-bold ms-3 text-resp">
+                        <FaUserCircle color="#fff" size="26px" className="mr-10"/>
+                        {selectedUser.name}</span>
                 </div>
-                <motion.button 
-                    onClick={handleOpen}
-                    whileTap={ {scale: 2.5} }
-                    className="button-info mr-1rem"
-                >
-                    <IoIosInformationCircle />
-                </motion.button>
+                <div>
+                    <motion.button 
+                        onClick={handleOpen}
+                        whileTap={ {scale: 2.5} }
+                        className="button-info mr-1rem"
+                    >
+                        <IoIosInformationCircle />
+                    </motion.button>
+                    {showMenuButton && 
+                    <motion.button
+                            onClick={() => dispatch( openSidebar() )}
+                            whileTap={ {scale: 2.5} }
+                            className="button-info mr-1rem"
+                        >
+                        <AiOutlineMenu />
+                    </motion.button>
+                    }
+                    
+                </div>
             </div>
-            <div className="chat-messages overflow-auto pt-4 bg-chat">
+            <div className="overflow-auto pt-4 bg-chat chat-container">
             
             {(loading) &&
                 <div className="w-100 d-flex justify-content-center">
@@ -82,8 +98,8 @@ export const PrivateChat = ({ sendPrivateMessage }) => {
                 </div>
             }
             {(chatMessages && !loading && chatMessages.length === 0) &&
-                <div className="alert alert-warning mx-5 text-center">
-                    No tienes mensajes con <strong>{selectedUser?.name}.</strong>
+                <div className="alert alert-warning text-center text-resp mx-alert">
+                    Aún no tienes mensajes con <strong>{selectedUser?.name}.</strong>
                 </div>
             }
             {chatMessages &&

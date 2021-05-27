@@ -1,16 +1,19 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { IoIosInformationCircle, IoMdSend } from 'react-icons/io'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Spinner } from 'react-bootstrap';
 import { MessageReceived } from '../dashboard/MessageReceived';
 import { MessageSent } from '../dashboard/MessageSent';
 import { motion } from 'framer-motion';
 import { ModalInfo } from './ModalInfo';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { openSidebar } from '../../actions/dashboard';
 
-export const Chat = ({ sendMessage }) => {
+export const Chat = ({ sendMessage, showMenuButton }) => {
 
     const [show, setShow] = useState(false);
+    const dispatch = useDispatch();
     const textRef = useRef();
     const { messages } = useSelector(state => state.dashboard);
     const { uid } = useSelector(state => state.auth);
@@ -41,19 +44,31 @@ export const Chat = ({ sendMessage }) => {
             <div className="d-flex align-items-center justify-content-between bg-head-chat">
                 <div>
                     <img src="./assets/img1.jpg" alt="Foto de perfil de grupo" id="img-chat" className="ms-3"/>
-                    <span className="text-white fw-bold ms-3">Chat general</span>
+                    <span className="text-white fw-bold ms-3 text-resp">Chat general</span>
                 </div>
-                <motion.button 
-                    onClick={handleOpen}
-                    whileTap={ {scale: 2.5} }
-                    className="button-info mr-1rem"
-                >
-                    <IoIosInformationCircle />
-                </motion.button>
+                <div>
+                    <motion.button 
+                        onClick={handleOpen}
+                        whileTap={ {scale: 2.5} }
+                        className="button-info mr-1rem"
+                    >
+                        <IoIosInformationCircle />
+                    </motion.button>
+
+                    {showMenuButton && 
+                    <motion.button
+                        onClick={() => dispatch( openSidebar() )}
+                        whileTap={ {scale: 2.5} }
+                        className="button-info mr-1rem"
+                    >
+                        <AiOutlineMenu />
+                    </motion.button>
+                    }
+                </div>
             </div>
-            <div className="overflow-auto pt-4 bg-chat">
+            <div className="overflow-auto pt-4 bg-chat chat-container">
                 {(messages.length === 0) && 
-                    <div className="alert alert-warning text-center mx-5">Todavía no hay mensajes, comienza escribiendo uno.</div>
+                    <div className="alert alert-warning text-center mx-5 text-resp">Todavía no hay mensajes, comienza escribiendo uno.</div>
                 }
                 {(messages.length === 0) &&
                     <div className="w-100 d-flex justify-content-center">

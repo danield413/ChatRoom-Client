@@ -10,7 +10,9 @@ export const types = {
     cleanDashboard: "DASHBOARD clean",
     selectUser: "DASHBOARD select user",
     addAllUsers: "DASHBOARD add all registered users",
+    openSidebar: "DASHBOARD open sidebar",
+    closeSidebar: "DASHBOARD close sidebar",
     
     loadStats: "STATS load stats",
-    cleanStats: "STATS clean stats"
+    cleanStats: "STATS clean stats",
 }

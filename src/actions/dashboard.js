@@ -26,4 +26,7 @@ export const addAllUsers = ( payload ) => ({
     payload
 })
 
+export const openSidebar = () => ({ type: types.openSidebar })
+export const closeSidebar = () => ({ type: types.closeSidebar })
+
 export const cleanDashboard = () => ({ type: types.cleanDashboard })

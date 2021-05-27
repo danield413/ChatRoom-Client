@@ -9,7 +9,7 @@ export const All = () => {
 
     return (
         <>
-            <h5 className="lead ms-4 my-3"><strong className="text-light">Todos</strong></h5>
+            <h5 className="lead ms-4 my-3"><strong className="text-light text-resp">Todos</strong></h5>
             <div className="w-100 overflow-auto all-height">
             {allUsers &&
                 allUsers.map(user => (
