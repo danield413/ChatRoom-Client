@@ -14,7 +14,7 @@ export const dashboardReducer = (state = initialState, action) => {
         case types.addMessages:
             return {
                 ...state,
-                messages: action.payload
+                messages: action?.payload ? action.payload : []
             }
         case types.addUsers:
             return {

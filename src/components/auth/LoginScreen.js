@@ -6,6 +6,7 @@ import {Helmet} from "react-helmet";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { startLogin } from '../../actions/auth';
+import { GoogleButton } from './GoogleButton';
 
 
 export const LoginScreen = () => {
@@ -33,6 +34,8 @@ export const LoginScreen = () => {
             dispatch( startLogin(email, password) );
         }   
     });
+
+    
 
     return (
         <>
@@ -75,6 +78,7 @@ export const LoginScreen = () => {
                         <Button type="submit" variant="outline-primary" className="w-100 mt-3">
                             Ingresar
                         </Button>
+                        <GoogleButton />
                         <Link to="/auth/register" className="d-inline-block mt-3">Si no tienes una cuenta</Link>
                     </Form>
                 </div>

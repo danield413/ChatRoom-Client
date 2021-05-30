@@ -75,7 +75,7 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
                         <Spinner animation="border" role="status" variant="primary" />
                     </div>
                 }
-                {messages &&
+                {(messages.length > 0) &&
                     messages.map((message, index) => {
                         const lastMessage = messages.length - 1 === index;
                         if(message.user._id === uid){

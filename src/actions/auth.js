@@ -23,7 +23,7 @@ export const startLogin = ( email, password ) => {
     }
 }
 
-const login = ( data ) => ({
+export const login = ( data ) => ({
     type: types.authLogin,
     payload: data
 });

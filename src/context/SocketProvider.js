@@ -46,6 +46,7 @@ export const SocketProvider = ( {children} ) => {
     useEffect(() => {
         if(!socket) return;
         socket.on('receive-messages', (payload) => {
+            console.log('llamado');
             dispatch( addMessages(payload) )
         })
 
