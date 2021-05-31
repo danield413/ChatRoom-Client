@@ -3,6 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
 import { useDispatch } from 'react-redux';
 import { login } from '../../actions/auth';
+import { motion } from 'framer-motion';
 
 export const GoogleButton = () => {
 
@@ -48,7 +49,8 @@ export const GoogleButton = () => {
                 cookiePolicy={'single_host_origin'}
                 className="mt-3 w-100 text-center"
                 render={renderProps => (
-                    <div 
+                    <motion.div 
+                        whileTap={{ scale: 1.1 }}
                         onClick={renderProps.onClick} 
                         disabled={renderProps.disabled}
                         className="google-btn"
@@ -57,7 +59,7 @@ export const GoogleButton = () => {
                             <FcGoogle size="1.7rem"/>
                         </div>
                         <div className="l-text">Ingresar con Google</div>
-                    </div>
+                    </motion.div>
                 )}
             />
         </div>

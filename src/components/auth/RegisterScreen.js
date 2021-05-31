@@ -49,7 +49,8 @@ export const RegisterScreen = () => {
                 
                 <div className="form">
                     <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
-                        <h2 className="text-white text-start mb-3 texto">ChatRoom</h2>
+                        <h2 className="text-white text-start texto mb-0">ChatRoom</h2>
+                        <p className="text-muted text-end">por Daniel Díaz</p>
                         <h4 className="text-white lead mt-3">Registro</h4>
                         <Form.Group className="mb-3">
                             <Form.Control 

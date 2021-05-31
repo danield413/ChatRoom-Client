@@ -1,5 +1,20 @@
 @import url('./spinner.css');
 @import url('./global.css');
+@import url('./responsive.css');
+
+/* Variables */
+:root {
+  --aside: #262D31;
+  --mesage-received: #262D31;
+  --message-sent: #056162;
+  --online: #1DD200;
+  --head-chat: #2A2F32;
+  --chat: #333A41;
+  --input-chat: #2A2F32;
+
+  --bs-primary: #0d6efd;
+  --bs-primary-opacity: rgb(13, 110, 253, 0.7);
+}
 
 * {
   font-family: 'Poppins', sans-serif;
