@@ -15,7 +15,7 @@ export const startLogin = ( email, password ) => {
             dispatch( login({
                 uid: data.user.uid,
                 name: data.user.name,
-                email: data.user.email
+                email: data.user.email,
             }))
         } else {
             Swal.fire('Error', data.msg, 'error');
@@ -74,7 +74,8 @@ export const startChecking = () => {
             dispatch( login({
                 uid: data.user.uid,
                 name: data.user.name,
-                email: data.user.email
+                email: data.user.email,
+                picture: data.user.picture
             }))
         } else {
             dispatch( checkingFinish() )

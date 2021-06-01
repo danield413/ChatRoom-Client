@@ -79,6 +79,7 @@ export const LoginScreen = () => {
                             Ingresar
                         </Button>
                         <GoogleButton />
+                        {/* <FacebookButton /> */}
                         <Link to="/auth/register" className="d-inline-block mt-3">Si no tienes una cuenta</Link>
                     </Form>
                 </div>

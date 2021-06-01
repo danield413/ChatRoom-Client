@@ -66,7 +66,7 @@
     background: #262D31;
     border: none;
     border-bottom: 0.1em solid rgb(68, 68, 68);
-    transition: 0.3s ease;
+    transition: 0.3s ease-in-out;
 }
 
 .user-sidebar:hover {
@@ -77,16 +77,11 @@
     background: #323739;
 }
 
-#img-chat {
-    width: 45px;
-    border-radius: 50%;
-}
-
 .button-group {
     border: none;
     background: #5159ff;
     height: 50px;
-    transition: .3s ease;
+    transition: .3s ease-in;
 }
 
 .button-group-active {
@@ -239,4 +234,9 @@
 
 .z-100 {
     z-index: 100000;
+}
+
+.img-topbar {
+    width: 38px;
+    border-radius: 50%;
 }

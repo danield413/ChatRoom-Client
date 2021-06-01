@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Spinner } from 'react-bootstrap';
-import { FaUserCircle } from 'react-icons/fa';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { IoIosInformationCircle, IoMdSend } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
@@ -67,8 +66,12 @@ export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
             <div className="py-2 d-flex align-items-center justify-content-between bg-head-chat">
                 <div>
                     <span className="text-white fw-bold ms-3 text-resp">
-                        <FaUserCircle color="#fff" size="26px" className="mr-10"/>
-                        {selectedUser.name}</span>
+                        {selectedUser.picture !== 'null' 
+                            ? <img src={selectedUser.picture} alt={selectedUser.name} className=" mr-10 img-topbar"/>
+                            : <img src="./assets/default-user.png" alt="default" className="mr-10 img-topbar"/>
+                        }
+                        {selectedUser.name}
+                    </span>
                 </div>
                 <div>
                     <motion.button 

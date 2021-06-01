@@ -14,7 +14,7 @@ export function useSocket() {
 export const SocketProvider = ( {children} ) => {
 
     const [socket, setSocket] = useState();
-    const { uid, name } = useSelector(state => state.auth);
+    const { uid, name, picture } = useSelector(state => state.auth);
     const { selectedUser } = useSelector(state => state.dashboard);
     const dispatch = useDispatch();
 
@@ -34,19 +34,19 @@ export const SocketProvider = ( {children} ) => {
     }, [selectedUser?.uid, selectedUser?.name, socket]);
 
     useEffect(() => {
+        
+            const newSocket = io(process.env.REACT_APP_URL, {
+            query: { uid, name, picture }
+            })
+            setSocket(newSocket)     
 
-        const newSocket = io(process.env.REACT_APP_URL, {
-        query: { uid, name }
-        })
-        setSocket(newSocket)
-  
         return () => newSocket.close();
-    }, [uid, name]);
+    }, [uid, name, picture]);
+
 
     useEffect(() => {
         if(!socket) return;
         socket.on('receive-messages', (payload) => {
-            console.log('llamado');
             dispatch( addMessages(payload) )
         })
 

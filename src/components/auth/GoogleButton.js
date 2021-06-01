@@ -23,8 +23,8 @@ export const GoogleButton = () => {
             body: JSON.stringify(data)
         })
         .then( res => res.json() )
-        .then( ({uid, name, email, google, token}) => {
-            dispatch( login({uid, name, email, google}) );
+        .then( ({uid, name, email, google, picture, token}) => {
+            dispatch( login({uid, name, email, google, picture}) );
             localStorage.setItem('chat-token', token)
         })
         .catch( console.log )
@@ -35,17 +35,12 @@ export const GoogleButton = () => {
         await doFetch(tokenId);
     }
 
-    const onFailure = (res) => {
-        console.log('Login failed =>', res);
-    }
-
     return (
         <div>
             <GoogleLogin
                 clientId={clientId}
                 buttonText="Iniciar sesión con Google"
                 onSuccess={onSuccess}
-                onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}
                 className="mt-3 w-100 text-center"
                 render={renderProps => (

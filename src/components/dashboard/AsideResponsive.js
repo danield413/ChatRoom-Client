@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap'
-import { FaUserCircle } from 'react-icons/fa'
+import React, { useCallback, useEffect, useState } from 'react';
+import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { AiTwotoneSetting } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/auth'
@@ -12,12 +11,13 @@ import { IoIosStats } from 'react-icons/io';
 import { cleanStats } from '../../actions/stats';
 import { VscChromeClose } from 'react-icons/vsc';
 import { motion } from 'framer-motion';
+import { cutName } from '../../helpers/cutName';
 
 export const AsideResponsive = () => {
 
     const [state, setState] = useState('online')
     const dispatch = useDispatch();
-    const { uid, name } = useSelector(state => state.auth);
+    const { uid, name, picture } = useSelector(state => state.auth);
     const { users } = useSelector(state => state.dashboard);
     const { selectedUser } = useSelector(state => state.dashboard);
 
@@ -44,8 +44,11 @@ export const AsideResponsive = () => {
             <header>
                 <div className="w-100 bg-dark d-flex justify-content-between align-items-center px-2 header-height">
                     <div>
-                        <FaUserCircle color="#fff" size="26px" className="ms-3 mr-10"/>
-                        <span className="fw-bold text-white text-resp">{name}</span>
+                        {picture 
+                        ? <img src={picture} alt={name} className="ms-3 mr-10 img-topbar"/>
+                        : <img src="./assets/default-user.png" alt="default" className="ms-3 mr-10 img-topbar"/>
+                        }
+                        <span className="fw-bold text-white text-resp">{cutName(name)}</span>
                     </div>
                     <div>
                         <DropdownButton title={<AiTwotoneSetting />} id="dropdown-item-button" variant="dark" className="bg-dark d-inline">

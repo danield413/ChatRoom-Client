@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap'
-import { FaUserCircle } from 'react-icons/fa'
+import React, { useCallback, useEffect, useState } from 'react';
+import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { AiTwotoneSetting } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/auth'
@@ -10,12 +9,13 @@ import { All } from './All';
 import { Link } from 'react-router-dom';
 import { IoIosStats } from 'react-icons/io';
 import { cleanStats } from '../../actions/stats';
+import { cutName } from '../../helpers/cutName';
 
 export const Aside = () => {
 
     const [state, setState] = useState('online')
     const dispatch = useDispatch();
-    const { uid, name } = useSelector(state => state.auth);
+    const { uid, name, picture } = useSelector(state => state.auth);
     const { users } = useSelector(state => state.dashboard);
     const { selectedUser } = useSelector(state => state.dashboard);
 
@@ -42,8 +42,11 @@ export const Aside = () => {
             <header>
                 <div className="w-100 bg-dark d-flex justify-content-between align-items-center px-2 header-height">
                     <div>
-                        <FaUserCircle color="#fff" size="26px" className="ms-3 mr-10"/>
-                        <span className="fw-bold text-white">{name}</span>
+                        {picture 
+                        ? <img src={picture} alt={name} className="ms-3 mr-10 img-topbar"/>
+                        : <img src="./assets/default-user.png" alt="default" className="ms-3 mr-10 img-topbar"/>
+                        }
+                        <span className="fw-bold text-white">{cutName(name)}</span>
                     </div>
                     
                     <DropdownButton title={<AiTwotoneSetting />} id="dropdown-item-button" variant="dark" className="bg-dark d-inline">
@@ -57,7 +60,7 @@ export const Aside = () => {
                         
                 </div>
             </header>
-            <p className="text-muted text-center mt-2">{uid}</p>
+            <p className="text-muted text-center mt-2">ID: {uid}</p>
             <div className="w-100 d-flex justify-content-center mb-3">
                 <Link to="/stats" className="btn btn-outline-info d-flex align-items-center "><IoIosStats className="me-1"/>Estadísticas</Link>
             </div>

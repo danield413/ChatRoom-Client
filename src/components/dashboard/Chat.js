@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState } from 'react'
 import { IoIosInformationCircle, IoMdSend } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Spinner } from 'react-bootstrap';
 import { MessageReceived } from '../dashboard/MessageReceived';
 import { MessageSent } from '../dashboard/MessageSent';
 import { motion } from 'framer-motion';
@@ -43,7 +42,7 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
         <div className="chat w-100">
             <div className="d-flex align-items-center justify-content-between bg-head-chat">
                 <div>
-                    <img src="./assets/img1.jpg" alt="Foto de perfil de grupo" id="img-chat" className="ms-3"/>
+                    <img src="./assets/img1.jpg" alt="Foto de perfil de grupo" className="ms-3 img-topbar"/>
                     <span className="text-white fw-bold ms-3 text-resp">Chat general</span>
                 </div>
                 <div>
@@ -69,11 +68,6 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
             <div className="overflow-auto pt-4 bg-chat chat-container">
                 {(messages.length === 0) && 
                     <div className="alert alert-warning text-center mx-5 text-resp">Todavía no hay mensajes, comienza escribiendo uno.</div>
-                }
-                {(messages.length === 0) &&
-                    <div className="w-100 d-flex justify-content-center">
-                        <Spinner animation="border" role="status" variant="primary" />
-                    </div>
                 }
                 {(messages.length > 0) &&
                     messages.map((message, index) => {
