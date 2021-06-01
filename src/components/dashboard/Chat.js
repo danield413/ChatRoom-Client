@@ -65,7 +65,7 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
                     }
                 </div>
             </div>
-            <div className="overflow-auto pt-4 bg-chat chat-container">
+            <div className="overflow-auto pt-4 bg-chat w-100">
                 {(messages.length === 0) && 
                     <div className="alert alert-warning text-center mx-5 text-resp">Todavía no hay mensajes, comienza escribiendo uno.</div>
                 }

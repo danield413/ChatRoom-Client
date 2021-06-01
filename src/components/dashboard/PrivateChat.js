@@ -93,7 +93,7 @@ export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
                     
                 </div>
             </div>
-            <div className="overflow-auto pt-4 bg-chat chat-container">
+            <div className="overflow-auto pt-4 bg-chat">
             
             {(loading) &&
                 <div className="w-100 d-flex justify-content-center">
