@@ -63,17 +63,17 @@ export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
     return (
         <>
         <div className="chat w-100">
-            <div className="py-2 d-flex align-items-center justify-content-between bg-head-chat">
-                <div>
-                    <span className="text-white fw-bold ms-3 text-resp">
+            <div className="bg-head-chat header-chat">
+                <div className="d-flex align-items-center">
                         {selectedUser.picture !== 'null' 
-                            ? <img src={selectedUser.picture} alt={selectedUser.name} className=" mr-10 img-topbar"/>
-                            : <img src="./assets/default-user.png" alt="default" className="mr-10 img-topbar"/>
+                            ? <img src={selectedUser.picture} alt={selectedUser.name} className="ms-3  img-topbar"/>
+                            : <img src="./assets/default-user.png" alt="default" className="ms-3 img-topbar"/>
                         }
+                    <span className="text-white fw-bold ms-3 text-resp">
                         {selectedUser.name}
                     </span>
                 </div>
-                <div>
+                <div className="d-flex align-items-center justify-content-end">
                     <motion.button 
                         onClick={handleOpen}
                         whileTap={ {scale: 2.5} }
@@ -93,7 +93,7 @@ export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
                     
                 </div>
             </div>
-            <div className="overflow-auto pt-4 bg-chat">
+            <div className="overflow-auto pt-4 bg-chat container-chat">
             
             {(loading) &&
                 <div className="w-100 d-flex justify-content-center">

@@ -42,7 +42,8 @@ export const startRegister = ( name, email, password ) => {
             dispatch( login({
                 uid: data.user.uid,
                 name: data.user.name,
-                email: data.user.email
+                email: data.user.email,
+                picture: data.user.picture
             }));
 
             Swal.fire({

@@ -40,12 +40,13 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
     return (
         <>
         <div className="chat w-100">
-            <div className="d-flex align-items-center justify-content-between bg-head-chat">
-                <div>
+            <div className="bg-head-chat header-chat">
+                <div className="d-flex align-items-center">
                     <img src="./assets/img1.jpg" alt="Foto de perfil de grupo" className="ms-3 img-topbar"/>
                     <span className="text-white fw-bold ms-3 text-resp">Chat general</span>
                 </div>
-                <div>
+            
+                <div className="d-flex align-items-center justify-content-end">
                     <motion.button 
                         onClick={handleOpen}
                         whileTap={ {scale: 2.5} }
@@ -65,7 +66,7 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
                     }
                 </div>
             </div>
-            <div className="overflow-auto pt-4 bg-chat w-100">
+            <div className="overflow-auto pt-4 bg-chat container-chat">
                 {(messages.length === 0) && 
                     <div className="alert alert-warning text-center mx-5 text-resp">Todavía no hay mensajes, comienza escribiendo uno.</div>
                 }

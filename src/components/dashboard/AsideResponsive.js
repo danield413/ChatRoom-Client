@@ -69,7 +69,7 @@ export const AsideResponsive = () => {
                     </div>
                 </div>
             </header>
-            <p className="text-muted text-center mt-2">{uid}</p>
+            <p className="text-muted text-center mt-2">ID: {uid}</p>
             <div className="w-100 d-flex justify-content-center mb-3">
                 <Link to="/stats" className="btn btn-outline-info d-flex align-items-center text-"><IoIosStats className="me-1"/>Estadísticas</Link>
             </div>

@@ -8,7 +8,7 @@ export const Online = () => {
     const { uid } = useSelector(state => state.auth);
     const { selectedUser } = useSelector(state => state.dashboard);
     const { users } = useSelector(state => state.dashboard);
-    
+
     return (
         <>
             <h6 className="lead ms-4 my-3 "><strong className="text-light text-resp">Conectados</strong></h6>
@@ -34,11 +34,11 @@ export const Online = () => {
                                     } }
                                     className={`text-resp text-white w-100 text-start animate__animated animate animate__fadeIn user-sidebar ${user.id === selectedUser?.uid ? 'user-sidebar-active' : ''}`} 
                                 >
-                                    {user.picture !== 'null' 
+                                    {user.picture !== 'null'
                                         ? <img src={user.picture} alt={user.name} className="ms-3 mr-10 img-topbar"/>
                                         : <img src="./assets/default-user.png" alt="default" className="ms-3 mr-10 img-topbar"/>
                                     }
-                                    <span className="fw-bold text-resp">{user.name} <i className="fas fa-circle mx-2 fz-12px text-online"></i></span>
+                                    <span className="fw-bold text-resp">{user.name} <i className="fas fa-circle mx-2 text-online"></i></span>
                                 </button>
                         ))
                     }
