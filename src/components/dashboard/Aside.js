@@ -3,7 +3,7 @@ import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { AiTwotoneSetting } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/auth'
-import { cleanDashboard, selectUser } from '../../actions/dashboard';
+import { cleanDashboard, closeSidebar, selectUser } from '../../actions/dashboard';
 import { Online } from './Online';
 import { All } from './All';
 import { Link } from 'react-router-dom';
@@ -46,7 +46,10 @@ export const Aside = () => {
                         ? <img src={picture} alt={name} className="ms-3 mr-10 img-topbar"/>
                         : <img src="./assets/default-user.png" alt="default" className="ms-3 mr-10 img-topbar"/>
                         }
-                        <span className="fw-bold text-white">{cutName(name)}</span>
+                        <span className="fw-bold text-white">
+                            {cutName(name)}
+                            <i className="fas fa-circle mx-2 text-online"></i>
+                        </span>
                     </div>
                     
                     <DropdownButton title={<AiTwotoneSetting />} id="dropdown-item-button" variant="dark" className="bg-dark d-inline">
@@ -62,7 +65,14 @@ export const Aside = () => {
             </header>
             <p className="text-muted text-center mt-2">ID: {uid}</p>
             <div className="w-100 d-flex justify-content-center mb-3">
-                <Link to="/stats" className="btn btn-outline-info d-flex align-items-center "><IoIosStats className="me-1"/>Estadísticas</Link>
+                <Link 
+                    className="text-resp link-button px-3 fw-bold"
+                    to="/stats"
+                    onClick={() => dispatch( closeSidebar() )}
+                >
+                    <IoIosStats />
+                    Estadísticas
+                </Link>
             </div>
             <div>
                 <ButtonGroup aria-label="selección" className="w-100">

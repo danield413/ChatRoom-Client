@@ -48,7 +48,10 @@ export const AsideResponsive = () => {
                         ? <img src={picture} alt={name} className="ms-3 mr-10 img-topbar"/>
                         : <img src="./assets/default-user.png" alt="default" className="ms-3 mr-10 img-topbar"/>
                         }
-                        <span className="fw-bold text-white text-resp">{cutName(name)}</span>
+                        <span className="fw-bold text-white text-resp">
+                            {cutName(name)}
+                            <i className="fas fa-circle mx-2 text-online"></i>
+                        </span>
                     </div>
                     <div>
                         <DropdownButton title={<AiTwotoneSetting />} id="dropdown-item-button" variant="dark" className="bg-dark d-inline">
@@ -71,7 +74,14 @@ export const AsideResponsive = () => {
             </header>
             <p className="text-muted text-center mt-2">ID: {uid}</p>
             <div className="w-100 d-flex justify-content-center mb-3">
-                <Link to="/stats" className="btn btn-outline-info d-flex align-items-center text-"><IoIosStats className="me-1"/>Estadísticas</Link>
+                <Link 
+                    className="text-resp link-button px-3 fw-bold"
+                    to="/stats"
+                    onClick={() => dispatch( closeSidebar() )}
+                >
+                    <IoIosStats />
+                    Estadísticas
+                </Link>
             </div>
             <div>
                 <ButtonGroup aria-label="selección" className="w-100">

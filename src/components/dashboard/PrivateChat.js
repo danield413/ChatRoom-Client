@@ -70,7 +70,7 @@ export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
                             : <img src="./assets/default-user.png" alt="default" className="ms-3 img-topbar"/>
                         }
                     <span className="text-white fw-bold ms-3 text-resp">
-                        {selectedUser.name}
+                        {selectedUser.name} <i className="fas fa-circle mx-2 text-online"></i>
                     </span>
                 </div>
                 <div className="d-flex align-items-center justify-content-end">

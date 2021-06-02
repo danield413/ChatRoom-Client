@@ -34,7 +34,7 @@ export const Online = () => {
                                     } }
                                     className={`text-resp text-white w-100 text-start animate__animated animate animate__fadeIn user-sidebar ${user.id === selectedUser?.uid ? 'user-sidebar-active' : ''}`} 
                                 >
-                                    {user.picture !== 'null'
+                                    {(user.picture !== 'undefined' && user.picture !== 'null')
                                         ? <img src={user.picture} alt={user.name} className="ms-3 mr-10 img-topbar"/>
                                         : <img src="./assets/default-user.png" alt="default" className="ms-3 mr-10 img-topbar"/>
                                     }

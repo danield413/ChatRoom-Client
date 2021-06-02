@@ -35,36 +35,38 @@ export const DashboardScreen = () => {
                 <meta name="description" content="Contenido principal del usuario y salas de chat" />
             </Helmet>
             
-            <div id="container-grid">
+            <main>
+                <div id="container-grid">
 
-                {width > 900 &&
-                <div className="p-0 aside-color">
-                     <Aside /> 
-                </div>
-                }
+                    {width > 900 &&
+                    <div className="p-0 aside-color">
+                        <Aside /> 
+                    </div>
+                    }
 
-                {width <= 900 &&
-                <div className={`p-0 aside-color aside-responsive ${showSidebar && 'aside-responsive-show'}`}>
-                    <AsideResponsive />
-                </div>
-                }
+                    {width <= 900 &&
+                    <div className={`p-0 aside-color aside-responsive ${showSidebar && 'aside-responsive-show'}`}>
+                        <AsideResponsive />
+                    </div>
+                    }
 
 
-                <div className="p-0 d-flex">
-                    <div className="d-flex column-chat-dimensions" id="chat">
-                        {selectedUser?.uid && selectUser?.name 
-                        ? <PrivateChat 
-                            sendPrivateMessage={sendPrivateMessage} 
-                            showMenuButton={ width < 900 ? true : false } 
-                        />
-                        : <Chat 
-                            sendMessage={sendMessage} 
-                            showMenuButton={ width < 900 ? true : false }
-                        />
-                        }
+                    <div className="p-0 d-flex">
+                        <div className="d-flex column-chat-dimensions" id="chat">
+                            {selectedUser?.uid && selectUser?.name 
+                            ? <PrivateChat 
+                                sendPrivateMessage={sendPrivateMessage} 
+                                showMenuButton={ width < 900 ? true : false } 
+                            />
+                            : <Chat 
+                                sendMessage={sendMessage} 
+                                showMenuButton={ width < 900 ? true : false }
+                            />
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </>
         
     )

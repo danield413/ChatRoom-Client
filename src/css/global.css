@@ -168,6 +168,12 @@
     background-color: var(--head-chat);
 }
 
+.header-stats {
+    display: flex;
+    align-items: center;
+    height: 65px;
+}
+
 .bg-chat {
     /* background-color: var(--chat); */
     background-image: linear-gradient(180deg, rgba(0,0,0,0.5) 100%, rgba(255,255,255,0.5) 100%), url('https://c.pshere.com/photos/24/ac/background_climb_cold_environment_freezing_HD_wallpaper_high_idyllic-1001421.jpg!d');
@@ -258,4 +264,25 @@
 
 .text-msg-res {
     font-size: .9rem;
+}
+
+.recharts-surface {
+    margin: 0 auto;
+}
+
+.link-button {
+    border: 2px solid cyan;
+    background-color: transparent;
+    color: cyan;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: 0.2s ease-in;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.link-button:hover {
+    background-color: cyan;
+    color: black;
 }
