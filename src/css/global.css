@@ -170,7 +170,7 @@
 
 .bg-chat {
     /* background-color: var(--chat); */
-    background-image: url('https://c.pshere.com/photos/24/ac/background_climb_cold_environment_freezing_HD_wallpaper_high_idyllic-1001421.jpg!d');
+    background-image: linear-gradient(180deg, rgba(0,0,0,0.5) 100%, rgba(255,255,255,0.5) 100%), url('https://c.pshere.com/photos/24/ac/background_climb_cold_environment_freezing_HD_wallpaper_high_idyllic-1001421.jpg!d');
     background-position: center;
     background-size: cover;
 }
