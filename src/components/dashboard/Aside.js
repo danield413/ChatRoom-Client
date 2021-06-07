@@ -3,13 +3,12 @@ import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { AiTwotoneSetting } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../actions/auth'
-import { cleanDashboard, closeSidebar, selectUser } from '../../actions/dashboard';
+import { cleanDashboard, selectUser } from '../../actions/dashboard';
 import { Online } from './Online';
 import { All } from './All';
-import { Link } from 'react-router-dom';
-import { IoIosStats } from 'react-icons/io';
 import { cleanStats } from '../../actions/stats';
 import { cutName } from '../../helpers/cutName';
+import { LinkButton } from './LinkButton';
 
 export const Aside = () => {
 
@@ -65,14 +64,7 @@ export const Aside = () => {
             </header>
             <p className="text-muted text-center mt-2">ID: {uid}</p>
             <div className="w-100 d-flex justify-content-center mb-3">
-                <Link 
-                    className="text-resp link-button px-3 fw-bold"
-                    to="/stats"
-                    onClick={() => dispatch( closeSidebar() )}
-                >
-                    <IoIosStats />
-                    Estadísticas
-                </Link>
+               <LinkButton to="/stats" text="Estadísticas"/>
             </div>
             <div>
                 <ButtonGroup aria-label="selección" className="w-100">

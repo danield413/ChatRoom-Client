@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { IoIosInformationCircle, IoMdSend } from 'react-icons/io'
+import { IoIosInformationCircle } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MessageReceived } from '../dashboard/MessageReceived';
@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { ModalInfo } from './ModalInfo';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { openSidebar } from '../../actions/dashboard';
+import { ChatInput } from './ChatInput';
 
 export const Chat = ({ sendMessage, showMenuButton }) => {
 
@@ -22,7 +23,6 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
             node.scrollIntoView({ behavior: 'smooth' })
         }
     }, [])
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -95,12 +95,7 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
                 }
             </div>
            
-            <div id="chat-input">
-                <form onSubmit={handleSubmit} className="h-100 d-flex align-items-center">
-                    <input ref={textRef} type="text" className="w-100" id="message-input" placeholder="Escribe un mensaje" autoComplete="off"/>
-                    <button type="submit" id="message-submit" className="d-flex align-items-center"><IoMdSend color="#fff" size="18px"/></button>
-                </form>
-            </div>
+            <ChatInput textRef={textRef} handleSubmit={handleSubmit} />
         </div>
         <ModalInfo handleClose={handleClose} show={show}/>
         </>
@@ -109,5 +104,6 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
 
 
 Chat.propType = {
-    sendMessage: PropTypes.func.isRequired
+    sendMessage: PropTypes.func.isRequired,
+    showMenuButton: PropTypes.func.isRequired
 }

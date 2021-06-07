@@ -2,8 +2,9 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { GrClose } from 'react-icons/gr';
+import PropTypes from 'prop-types';
 
-export const ModalInfo = ({show, handleClose, participants}) => {
+export const ModalInfo = ({show, handleClose, participants = []}) => {
     return (
         <Modal
             show={show}
@@ -24,8 +25,8 @@ export const ModalInfo = ({show, handleClose, participants}) => {
             <Modal.Body >
                 <h4 className="fw-bold text-center">Participantes</h4>
                 {
-                !participants 
-                ?<div className="w-100">
+                participants.length === 0 
+                ? <div className="w-100">
                     <div className="alert alert-info text-center text-resp">
                     Todos los usuarios registrados en <strong>ChatRoom</strong>
                     </div>
@@ -43,4 +44,10 @@ export const ModalInfo = ({show, handleClose, participants}) => {
             </Modal.Footer>
         </Modal>
     )
+}
+
+ModalInfo.propTypes = {
+    show: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    participants: PropTypes.array
 }
