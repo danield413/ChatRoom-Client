@@ -12,6 +12,7 @@ import { cleanStats } from '../../actions/stats';
 import { VscChromeClose } from 'react-icons/vsc';
 import { motion } from 'framer-motion';
 import { cutName } from '../../helpers/cutName';
+import { LinkButton } from './LinkButton';
 
 export const AsideResponsive = () => {
 
@@ -74,14 +75,7 @@ export const AsideResponsive = () => {
             </header>
             <p className="text-muted text-center mt-2">ID: {uid}</p>
             <div className="w-100 d-flex justify-content-center mb-3">
-                <Link 
-                    className="text-resp link-button px-3 fw-bold"
-                    to="/stats"
-                    onClick={() => dispatch( closeSidebar() )}
-                >
-                    <IoIosStats />
-                    Estadísticas
-                </Link>
+                <LinkButton to="/stats" text="Estadísticas"/>
             </div>
             <div>
                 <ButtonGroup aria-label="selección" className="w-100">
