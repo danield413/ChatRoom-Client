@@ -6,8 +6,6 @@ import { logout } from '../../actions/auth'
 import { cleanDashboard, closeSidebar, selectUser } from '../../actions/dashboard';
 import { Online } from './Online';
 import { All } from './All';
-import { Link } from 'react-router-dom';
-import { IoIosStats } from 'react-icons/io';
 import { cleanStats } from '../../actions/stats';
 import { VscChromeClose } from 'react-icons/vsc';
 import { motion } from 'framer-motion';
