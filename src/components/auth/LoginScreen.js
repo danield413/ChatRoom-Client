@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { startLogin } from '../../actions/auth';
 import { GoogleButton } from './GoogleButton';
+import { LogoForm } from './LogoForm';
 
 export const LoginScreen = () => {
 
@@ -47,9 +48,7 @@ export const LoginScreen = () => {
             <Container fluid className="bg-dark d-flex justify-content-center align-items-center container-full">
                 <div className="form">
                     <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
-                        <h2 className="text-white text-start texto mb-0">ChatRoom</h2>
-                        <p className="text-muted text-end">por Daniel Díaz</p>
-                        <h4 className="text-white lead">Inicio de sesión</h4>
+                        <LogoForm text="Inicio de sesión"/>
                         <Form.Group className="mb-3">
                             <Form.Control 
                                 autoComplete="off"
@@ -79,7 +78,6 @@ export const LoginScreen = () => {
                             Ingresar
                         </Button>
                         <GoogleButton />
-                        {/* <FacebookButton /> */}
                         <Link to="/auth/register" className="d-inline-block mt-3">Si no tienes una cuenta</Link>
                     </Form>
                 </div>

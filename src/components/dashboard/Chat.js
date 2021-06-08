@@ -9,6 +9,7 @@ import { ModalInfo } from './ModalInfo';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { openSidebar } from '../../actions/dashboard';
 import { ChatInput } from './ChatInput';
+import { HeaderInfoChat } from './HeaderInfoChat';
 
 export const Chat = ({ sendMessage, showMenuButton }) => {
 
@@ -41,10 +42,8 @@ export const Chat = ({ sendMessage, showMenuButton }) => {
         <>
         <div className="chat w-100">
             <div className="bg-head-chat header-chat">
-                <div className="d-flex align-items-center">
-                    <img src="./assets/img1.jpg" alt="Foto de perfil de grupo" className="ms-3 img-topbar"/>
-                    <span className="text-white fw-bold ms-3 text-resp">Chat general</span>
-                </div>
+                
+                <HeaderInfoChat location="public" />
             
                 <div className="d-flex align-items-center justify-content-end">
                     <motion.button 

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { startRegister } from '../../actions/auth';
+import { LogoForm } from './LogoForm';
 
 export const RegisterScreen = () => {
 
@@ -49,46 +50,44 @@ export const RegisterScreen = () => {
                 
                 <div className="form">
                     <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
-                        <h2 className="text-white text-start texto mb-0">ChatRoom</h2>
-                        <p className="text-muted text-end">por Daniel Díaz</p>
-                        <h4 className="text-white lead mt-3">Registro</h4>
+                        <LogoForm text="Registro"/>
                         <Form.Group className="mb-3">
                             <Form.Control 
-                                    autoComplete="off"
-                                    name="name"
-                                    className="bg-dark text-white" 
-                                    type="text" 
-                                    placeholder="Nombre" 
-                                    value={ formik.values.name }
-                                    onChange={ formik.handleChange }
-                                    onBlur={ formik.handleBlur }
-                                    isInvalid={formik.errors.name}
-                                />
+                                autoComplete="off"
+                                name="name"
+                                className="bg-dark text-white" 
+                                type="text" 
+                                placeholder="Nombre" 
+                                value={ formik.values.name }
+                                onChange={ formik.handleChange }
+                                onBlur={ formik.handleBlur }
+                                isInvalid={formik.errors.name}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Control 
-                                    autoComplete="off"
-                                    name="email"
-                                    className="bg-dark text-white" 
-                                    type="email" 
-                                    placeholder="Correo"  
-                                    value={ formik.values.email }
-                                    onChange={ formik.handleChange }
-                                    onBlur={ formik.handleBlur }
-                                    isInvalid={formik.errors.email}
-                                />
+                                autoComplete="off"
+                                name="email"
+                                className="bg-dark text-white" 
+                                type="email" 
+                                placeholder="Correo"  
+                                value={ formik.values.email }
+                                onChange={ formik.handleChange }
+                                onBlur={ formik.handleBlur }
+                                isInvalid={formik.errors.email}
+                            />
                         </Form.Group>
                         <Form.Group>
                             <Form.Control 
-                                    name="password"
-                                    className="bg-dark text-white" 
-                                    type="password" 
-                                    placeholder="Contraseña" 
-                                    value={ formik.values.password }
-                                    onChange={ formik.handleChange }
-                                    onBlur={ formik.handleBlur }
-                                    isInvalid={formik.errors.password}
-                                />
+                                name="password"
+                                className="bg-dark text-white" 
+                                type="password" 
+                                placeholder="Contraseña" 
+                                value={ formik.values.password }
+                                onChange={ formik.handleChange }
+                                onBlur={ formik.handleBlur }
+                                isInvalid={formik.errors.password}
+                            />
                         </Form.Group>
                         <Button type="submit" variant="outline-primary" className="w-100 mt-3">
                             Registrarme

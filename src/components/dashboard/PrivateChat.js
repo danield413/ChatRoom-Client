@@ -11,6 +11,7 @@ import { MessageReceived } from '../dashboard/MessageReceived';
 import { MessageSent } from '../dashboard/MessageSent';
 import { ModalInfo } from './ModalInfo';
 import { ChatInput } from './ChatInput';
+import { HeaderInfoChat } from './HeaderInfoChat';
 
 export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
 
@@ -65,15 +66,9 @@ export const PrivateChat = ({ sendPrivateMessage, showMenuButton }) => {
         <>
             <div className="chat w-100">
                 <div className="bg-head-chat header-chat">
-                    <div className="d-flex align-items-center">
-                            {selectedUser.picture !== 'null' 
-                                ? <img src={selectedUser.picture} alt={selectedUser.name} className="ms-3  img-topbar"/>
-                                : <img src="./assets/default-user.png" alt="default" className="ms-3 img-topbar"/>
-                            }
-                        <span className="text-white fw-bold ms-3 text-resp">
-                            {selectedUser.name} <i className="fas fa-circle mx-2 text-online"></i>
-                        </span>
-                    </div>
+                    
+                    <HeaderInfoChat location="private" />
+
                     <div className="d-flex align-items-center justify-content-end">
                         <motion.button 
                             onClick={handleOpen}
