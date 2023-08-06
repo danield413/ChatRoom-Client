@@ -43,7 +43,7 @@ export const GoogleButton = () => {
     const clientId = '257430794857-ifhr62u2i59t0snq8a3q4gns6k8or9a6.apps.googleusercontent.com';
 
     const url = ( window.location.hostname.includes('localhost') )
-                ? 'http://localhost:5000/api/auth/google'
+                ? 'http://localhost:8080/api/auth/google'
                 : 'https://room-chat-dan.herokuapp.com/api/auth/google'
 
     const doFetch = async (id_token) => {
@@ -63,6 +63,7 @@ export const GoogleButton = () => {
 
     const onSuccess = async (res) => {
         const {tokenId} = res;
+        console.log(tokenId)
         await doFetch(tokenId);
     }
 
@@ -71,7 +72,6 @@ export const GoogleButton = () => {
             <GoogleLogin
                 clientId={clientId}
                 onSuccess={onSuccess}
-                cookiePolicy={'single_host_origin'}
                 className="mt-3 w-100 text-center"
                 render={renderProps => (
                     // <motion.div 
