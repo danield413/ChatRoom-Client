@@ -51,6 +51,9 @@ export const RegisterScreen = () => {
                 <div className="form">
                     <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
                         <LogoForm text="Registro"/>
+                        <p className="text-muted">
+                            Crea una cuenta para poder chatear con las demás personas.
+                        </p>
                         <Form.Group className="mb-3">
                             <Form.Control 
                                 autoComplete="off"

@@ -139,7 +139,11 @@
 
 .bg-chat {
     /* background-color: var(--chat); */
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.5) 100%, rgba(255,255,255,0.5) 100%), url('https://c.pshere.com/photos/24/ac/background_climb_cold_environment_freezing_HD_wallpaper_high_idyllic-1001421.jpg!d');
+    /* background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); */
+    background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
+    /* background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%); */
+    /* background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%); */
+    /* background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); */
     background-position: center;
     background-size: cover;
 }

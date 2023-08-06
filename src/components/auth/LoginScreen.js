@@ -49,6 +49,10 @@ export const LoginScreen = () => {
                 <div className="form">
                     <Form onSubmit={formik.handleSubmit} className="animate__animated animate__fadeIn">
                         <LogoForm text="Inicio de sesión"/>
+                        <p className="text-muted">
+                            Inicia sesión con tu cuenta o con Google,
+                            tu información está segura aquí.
+                        </p>
                         <Form.Group className="mb-3">
                             <Form.Control 
                                 autoComplete="off"
