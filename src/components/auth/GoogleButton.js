@@ -44,7 +44,7 @@ export const GoogleButton = () => {
 
     const url = ( window.location.hostname.includes('localhost') )
                 ? 'http://localhost:8080/api/auth/google'
-                : 'https://room-chat-dan.herokuapp.com/api/auth/google'
+                : 'https://chatroom-server-gcuo-dev.fl0.io/api/auth/google'
 
     const doFetch = async (id_token) => {
         const data = { id_token }
